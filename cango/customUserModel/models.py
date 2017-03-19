@@ -66,7 +66,7 @@ class CangoUser(AbstractBaseUser):
 		unique=True,
 		)
 	nickname = models.CharField(max_length=16, unique=True, null=True)
-	date_of_birth = models.DateTimeField(null=True)
+	date_of_birth = models.DateField(null=True)
 	profile_pic = models.ImageField(
 		upload_to = get_image_path,
 		default='user_profile/default.png',

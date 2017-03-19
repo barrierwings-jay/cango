@@ -5,6 +5,11 @@ class Test(models.Model):
 	name = models.CharField(max_length=30)
 
 class Place(models.Model):
+	def get_image_path(instance, filename):
+		sampleList = filename.split('.')
+		extender = sampleList[1]
+		return 'place/{0}/{1}'.format(str(instance.id), filename)
+
 	daumID = models.CharField(max_length=30, null=True)
 	category = models.CharField(max_length=100, null=True)
 	name = models.CharField(max_length=100)
@@ -30,7 +35,7 @@ class Place(models.Model):
 
 	# 엘레베이터 유무
 	# 1 : 있음 / 2 : 없음
-	c_elevator_exist = models.PositiveSmallIntegerField(default=0)
+	c_elevator_exist = models.PositiveSmallIntegerField(null=True)
 
 	# 엘레베이터 정원
 	# Interger Type 정원 수 입력
@@ -38,23 +43,23 @@ class Place(models.Model):
 
 	# 테이블과 의자의 이동 가능 여부
 	# 1 : 둘다 가능 / 2 : 테이블만 가능 / 3 : 의자만 가능 / 4 : 둘다 고정 / 5: 해당없음 
-	c_chair_movable = models.PositiveSmallIntegerField(default=0)
+	c_chair_movable = models.PositiveSmallIntegerField(null=True)
 
 	# 화장실 접근 가능 여부
 	# 1 : 가능 / 2 : 불가능 / 3: 화장실 없음
-	c_toilet_available = models.PositiveSmallIntegerField(default=0)
+	c_toilet_available = models.PositiveSmallIntegerField(null=True)
 
 	# 장애인화장실 유무
 	# 1 : 있음 / 2 : 없음
-	c_handicapped_toilet = models.PositiveSmallIntegerField(default=0)
+	c_handicapped_toilet = models.PositiveSmallIntegerField(null=True)
 
 	# 주차장 유무
 	# 1 : 있음 / 2 : 없음
-	c_parking_lot_exist = models.PositiveSmallIntegerField(default=0)
+	c_parking_lot_exist = models.PositiveSmallIntegerField(null=True)
 
 	# 장애인주차장 유무
 	# 1 : 있음 / 2 : 없음
-	c_handicapped_parking_lot = models.PositiveSmallIntegerField(default=0)
+	c_handicapped_parking_lot = models.PositiveSmallIntegerField(null=True)
 
 	# 기타사항
 	extra_info = models.TextField(max_length=300, null=True)
@@ -63,19 +68,50 @@ class Place(models.Model):
 		null=True)
 	p_interior = models.ImageField(upload_to = 'test/',
 		null=True,)
-	p_extra_pic1 = models.ImageField(upload_to = 'test/',
+	p_extra_pic1 = models.ImageField(upload_to = get_image_path,
 		null=True)
-	p_extra_pic2 = models.ImageField(upload_to = 'test/',
+	p_extra_pic2 = models.ImageField(upload_to = get_image_path,
 		null=True)	
-	p_extra_pic3 = models.ImageField(upload_to = 'test/',
+	p_extra_pic3 = models.ImageField(upload_to = get_image_path,
 		null=True)
-	p_extra_pic4 = models.ImageField(upload_to = 'test/',
+	p_extra_pic4 = models.ImageField(upload_to = get_image_path,
 		null=True)
-	p_extra_pic5 = models.ImageField(upload_to = 'test/',
+	p_extra_pic5 = models.ImageField(upload_to = get_image_path,
+		null=True)
+	p_extra_pic6 = models.ImageField(upload_to = get_image_path,
+		null=True)
+	p_extra_pic7 = models.ImageField(upload_to = get_image_path,
+		null=True)
+	p_extra_pic8 = models.ImageField(upload_to = get_image_path,
 		null=True)
 
 	def __str__(self):
 		return self.name
+
+
+class PlaceHistory(models.Model):
+	groupID = models.ForeignKey(Place)
+	daumID = models.CharField(max_length=30, null=True)
+	category = models.CharField(max_length=100, null=True)
+	name = models.CharField(max_length=100)
+	address = models.CharField(max_length=200)
+	address_new = models.CharField(max_length=200)
+	phone_number = models.CharField(max_length=40, null=True)
+	latitude = models.DecimalField(max_digits=12, decimal_places=9)
+	longitude = models.DecimalField(max_digits=12, decimal_places=9)
+	user = models.ForeignKey(CangoUser, on_delete=models.SET_NULL, null=True)
+	c_barrier = models.PositiveSmallIntegerField()
+	c_floor = models.PositiveSmallIntegerField(null=True)
+	c_elevator_exist = models.PositiveSmallIntegerField(null=True)
+	c_elevator_capacity = models.PositiveSmallIntegerField(null=True)
+	c_chair_movable = models.PositiveSmallIntegerField(null=True)
+	c_toilet_available = models.PositiveSmallIntegerField(null=True)
+	c_handicapped_toilet = models.PositiveSmallIntegerField(null=True)
+	c_parking_lot_exist = models.PositiveSmallIntegerField(null=True)
+	c_handicapped_parking_lot = models.PositiveSmallIntegerField(null=True)
+	extra_info = models.TextField(max_length=300, null=True)
+	created_at = models.DateTimeField(auto_now_add=True)
+	verified_flag = models.BooleanField(default=False)	
 
 
 class Comment(models.Model):

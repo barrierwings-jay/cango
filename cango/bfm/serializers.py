@@ -111,6 +111,9 @@ class PlaceInfoSerializer(serializers.ModelSerializer):
 			'p_extra_pic3', 
 			'p_extra_pic4', 
 			'p_extra_pic5',
+			'p_extra_pic6',
+			'p_extra_pic7',
+			'p_extra_pic8'
 		)
 
 	# def from_native(self, data, files):
@@ -126,6 +129,9 @@ class PlaceRegisterSerializer(serializers.ModelSerializer):
 	p_extra_pic3 = Base64ImageField(max_length=None,use_url=True)
 	p_extra_pic4 = Base64ImageField(max_length=None,use_url=True)
 	p_extra_pic5 = Base64ImageField(max_length=None,use_url=True)
+	p_extra_pic6 = Base64ImageField(max_length=None,use_url=True)
+	p_extra_pic7 = Base64ImageField(max_length=None,use_url=True)
+	p_extra_pic8 = Base64ImageField(max_length=None,use_url=True)
 
 	class Meta:
 		model = Place
@@ -154,6 +160,9 @@ class PlaceRegisterSerializer(serializers.ModelSerializer):
 			'p_extra_pic3', 
 			'p_extra_pic4', 
 			'p_extra_pic5',
+			'p_extra_pic6',
+			'p_extra_pic7',
+			'p_extra_pic8'
 		]
 
 	def __init__(self, *args, **kwargs):
@@ -177,6 +186,9 @@ class PlaceRegisterSerializer(serializers.ModelSerializer):
 			'p_extra_pic3', 
 			'p_extra_pic4', 
 			'p_extra_pic5',
+			'p_extra_pic6',
+			'p_extra_pic7',
+			'p_extra_pic8'
 		]
 		for field in self.fields:
 			if field in list:

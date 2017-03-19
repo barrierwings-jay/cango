@@ -7,6 +7,7 @@ urlpatterns = [
     url(r'^user/place/$', UserPlaceList.as_view()),
     url(r'^search/$', SearchPlace.as_view()),
     url(r'^place/$', PlaceView.as_view()),
+    url(r'^place/update/$', PlaceUpdateView.as_view()),
     url(r'^place/comment/$', CommentView.as_view()),
     url(r'^place/like/$', LikeView.as_view()),
     url(r'^bookmark/$', BookmarkView.as_view()),
