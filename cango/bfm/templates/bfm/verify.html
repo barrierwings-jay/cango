@@ -1,0 +1,18 @@
+
+<table>
+	<th>#</th>
+	<th>장소이름</th>
+	<th>등록자</th>
+	<th>등록일자</th>
+	<th>승인하기</th>
+
+	{% for place in place_list %}
+	<tr>
+		<td>{{forloop.counter}}</td>
+		<td>{{place.name}}</td>
+		<td>{{place.user}}</td>
+		<td>{{place.created_at|date:"Y-m-d"}}</td>
+		<td><a href="{% url 'bfm:verify_detail' place.id %}">선택</a></td>
+	</tr>
+	{% endfor %}
+</table>

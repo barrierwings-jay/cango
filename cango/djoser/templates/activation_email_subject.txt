@@ -1,0 +1,3 @@
+{% load i18n %}{% autoescape off %}
+{% blocktrans %}캔고 어플 가입 이메일 인증{% endblocktrans %}
+{% endautoescape %}

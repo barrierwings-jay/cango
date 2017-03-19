@@ -1,0 +1,7 @@
+static
+__pycache__
+myvenv
+db.sqlite3
+&.pyc
+media
+setting_secret.py

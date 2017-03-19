@@ -1,0 +1,16 @@
+
+<table>
+	<th>#</th>
+	<th>장소이름</th>
+	<th>등록자</th>
+	<th>등록일자</th>
+
+	{% for place in place_list %}
+	<tr>
+		<td>{{forloop.counter}}</td>
+		<td>{{place.name}}</td>
+		<td>{{place.user}}</td>
+		<td>{{place.created_at|date:"Y-m-d"}}</td>
+	</tr>
+	{% endfor %}
+</table>

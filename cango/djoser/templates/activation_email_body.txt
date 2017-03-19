@@ -1,0 +1,23 @@
+아래의 버튼을 누르면 이메일 인증이 완료 됩니다.
+
+{% autoescape off %}
+<form action="{{ protocol }}://{{ domain }}//auth/activate" method="post">
+<input type="text" name="uid" value="{{uid}}>
+<input type="text" name="uid" value="{{uid}}>
+<input type="submit" value="인증">
+</form>
+{% endautoescape %}
+
+{% load i18n %}{% autoescape off %}
+{% blocktrans %}You're receiving this email because you created an account on {{ site_name }}.{% endblocktrans %}
+
+{% trans "Please go to the following page to activate account:" %}
+{% block reset_link %}
+{{ protocol }}://{{ domain }}/{{ url }}
+{% endblock %}
+
+{% trans "Thanks for using our site!" %}
+
+{% blocktrans %}The {{ site_name }} team{% endblocktrans %}
+
+{% endautoescape %}

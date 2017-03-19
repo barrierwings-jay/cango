@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html ng-app="bfApp">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        {% load staticfiles %}
+        <script src="{% static '/js/app.js' %}"></script>
+        <script src="{% static '/js/service.js' %}"></script>
+        <script src="{% static '/js/controller.js' %}"></script>
+
+        <title>Cango</title>
+    </head>
+
+    <body ng-controller="registerController as vm">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <h1 class="text-center">회원등록</h1>
+
+                <div class="well">
+                    <form role="form" ng-submit="vm.register()">
+                        <div class="form-group">
+                            <label>
+                                <input type="radio" ng-model="vm.supporters" value="1">
+                                무한궤도
+                            </label>
+                            <label>
+                                <input type="radio" ng-model="vm.supporters"  value="2">
+                                네이버 서포터즈
+                            </label>
+                        </div>
+                            
+                        <div class="form-group">
+                            <label for="register__email">Email</label>
+                            <input type="email" class="form-control" id="register__email" required ng-model="vm.email"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="register__nickname">이름</label>
+                            <input type="test" class="form-control" id="register__nickname" required ng-model="vm.nickname"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="register__password">비밀번호</label>
+                            <input type="password" class="form-control" id="register__password" required ng-model="vm.password"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="register__birthday">생일</label>
+                            <input type="date" class="form-control" id="register__birthday" required ng-model="vm.date_of_birth"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" ng-model="vm.use_wheelchair"/>
+                                휠체어 사용
+                            </label>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                    
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+

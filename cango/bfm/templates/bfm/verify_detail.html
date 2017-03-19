@@ -1,0 +1,17 @@
+<p> 장소이름 : {{object.name}}</p>
+<p> 구주소 : {{object.address}}</p>
+<p> 신주소 : {{object.address_new}}</p>
+
+<form action="{% url 'bfm:verify_confirm' %}" method="post">{% csrf_token %}
+	<input type="hidden" name="verified_pk" value="{{object.id}}">
+	<input type="hidden" name="result" value="verified">
+	<input type="submit" value="승인">
+</form>
+
+<form action="{% url 'bfm:verify_confirm' %}" method="post">{% csrf_token %}
+	<input type="hidden" name="verified_pk" value="{{object.id}}">
+	<input type="hidden" name="result" value="failed">
+	<input type="submit" value="실패">
+</form>
+
+<a href="{% url 'bfm:verify_main' %}">취소</a>
