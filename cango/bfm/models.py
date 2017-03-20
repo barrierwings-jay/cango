@@ -1,3 +1,6 @@
+import os
+from django.conf import settings
+from django.utils.crypto import get_random_string
 from django.db import models
 from customUserModel.models import CangoUser
 
@@ -7,8 +10,16 @@ class Test(models.Model):
 class Place(models.Model):
 	def get_image_path(instance, filename):
 		sampleList = filename.split('.')
+		name = sampleList[0]
 		extender = sampleList[1]
-		return 'place/{0}/{1}'.format(str(instance.id), filename)
+		rest_dir = 'place/{0}/{1}'.format(str(instance.name), filename)
+
+		filepath = os.path.join(settings.BASE_DIR, rest_dir)
+		while os.path.exists(filepath):
+			filename = name + get_random_string(5) + '.' + extender
+			rest_dir = 'place/{0}/{1}'.format(str(instance.name), filename)			
+
+		return 'place/{0}/{1}'.format(str(instance.name), filename)
 
 	daumID = models.CharField(max_length=30, null=True)
 	category = models.CharField(max_length=100, null=True)
