@@ -2,7 +2,7 @@ import os
 from django.conf import settings
 from django.utils.crypto import get_random_string
 from django.db import models
-from django.utils.encoding import smart_text
+from django.utils.encoding import force_text
 from customUserModel.models import CangoUser
 
 class Test(models.Model):
@@ -13,12 +13,12 @@ class Place(models.Model):
 		sampleList = filename.split('.')
 		name = sampleList[0]
 		extender = sampleList[1]
-		rest_dir = 'place/{0}/{1}'.format(smart_text(instance.name, encoding='utf-8', string_only=False, errors='strict'), filename)
+		rest_dir = 'place/{0}/{1}'.format(instance.name, filename)
 
 		filepath = os.path.join(settings.BASE_DIR, rest_dir)
 		while os.path.exists(filepath):
 			filename = name + get_random_string(5) + '.' + extender
-			rest_dir = 'place/{0}/{1}'.format(smart_text(instance.name, encoding='utf-8', string_only=False, errors='strict'), filename)			
+			rest_dir = 'place/{0}/{1}'.format(instance.name, filename)			
 
 		return 'place/{0}/{1}'.format(instance.name, filename)
 
